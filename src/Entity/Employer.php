@@ -22,41 +22,51 @@ class Employer
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $employerName;
+    private $first_name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $last_name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $company_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $address;
+    private $address1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $email1;
+    private $address2;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $email2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $telephone;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\OneToMany(targetEntity=Job::class, mappedBy="employer", orphanRemoval=true)
      */
-    private $aboutUs;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Job::class, mappedBy="employer")
-     */
-    private $category;
+    private $job;
 
     public function __construct()
     {
-        $this->category = new ArrayCollection();
+        $this->job = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,50 +74,86 @@ class Employer
         return $this->id;
     }
 
-    public function getEmployerName(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->employerName;
+        return $this->first_name;
     }
 
-    public function setEmployerName(string $employerName): self
+    public function setFirstName(string $first_name): self
     {
-        $this->employerName = $employerName;
+        $this->first_name = $first_name;
 
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getLastName(): ?string
     {
-        return $this->address;
+        return $this->last_name;
     }
 
-    public function setAddress(?string $address): self
+    public function setLastName(string $last_name): self
     {
-        $this->address = $address;
+        $this->last_name = $last_name;
 
         return $this;
     }
 
-    public function getEmail1(): ?string
+    public function getEmail(): ?string
     {
-        return $this->email1;
+        return $this->email;
     }
 
-    public function setEmail1(?string $email1): self
+    public function setEmail(string $email): self
     {
-        $this->email1 = $email1;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getEmail2(): ?string
+    public function getPassword(): ?string
     {
-        return $this->email2;
+        return $this->password;
     }
 
-    public function setEmail2(?string $email2): self
+    public function setPassword(string $password): self
     {
-        $this->email2 = $email2;
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getCompanyName(): ?string
+    {
+        return $this->company_name;
+    }
+
+    public function setCompanyName(string $company_name): self
+    {
+        $this->company_name = $company_name;
+
+        return $this;
+    }
+
+    public function getAddress1(): ?string
+    {
+        return $this->address1;
+    }
+
+    public function setAddress1(?string $address1): self
+    {
+        $this->address1 = $address1;
+
+        return $this;
+    }
+
+    public function getAddress2(): ?string
+    {
+        return $this->address2;
+    }
+
+    public function setAddress2(?string $address2): self
+    {
+        $this->address2 = $address2;
 
         return $this;
     }
@@ -117,21 +163,9 @@ class Employer
         return $this->telephone;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    public function getAboutUs(): ?string
-    {
-        return $this->aboutUs;
-    }
-
-    public function setAboutUs(?string $aboutUs): self
-    {
-        $this->aboutUs = $aboutUs;
 
         return $this;
     }
@@ -139,27 +173,27 @@ class Employer
     /**
      * @return Collection|Job[]
      */
-    public function getCategory(): Collection
+    public function getJob(): Collection
     {
-        return $this->category;
+        return $this->job;
     }
 
-    public function addCategory(Job $category): self
+    public function addJob(Job $job): self
     {
-        if (!$this->category->contains($category)) {
-            $this->category[] = $category;
-            $category->setEmployer($this);
+        if (!$this->job->contains($job)) {
+            $this->job[] = $job;
+            $job->setEmployer($this);
         }
 
         return $this;
     }
 
-    public function removeCategory(Job $category): self
+    public function removeJob(Job $job): self
     {
-        if ($this->category->removeElement($category)) {
+        if ($this->job->removeElement($job)) {
             // set the owning side to null (unless already changed)
-            if ($category->getEmployer() === $this) {
-                $category->setEmployer(null);
+            if ($job->getEmployer() === $this) {
+                $job->setEmployer(null);
             }
         }
 

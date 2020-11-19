@@ -18,16 +18,22 @@ class Job
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Employer::class, inversedBy="category")
+     * @ORM\ManyToOne(targetEntity=Employer::class, inversedBy="job")
      * @ORM\JoinColumn(nullable=false)
      */
     private $employer;
 
     /**
-     * @ORM\ManyToOne(targetEntity=JobCategory::class, inversedBy="description")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="job")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Resort::class, inversedBy="job")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $resort;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -35,50 +41,49 @@ class Job
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Resort::class, inversedBy="jobs")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $resort;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $wages;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $accommodationProvided;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $skiPassProvided;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $equipmentProvided;
+    private $accommodation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $fullBoard;
+    private $skipass;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $equipmenthire;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fullboard;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $dateStart;
+    private $date_start;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $dateEnd;
+    private $date_end;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $requirements;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $languages;
 
     public function getId(): ?int
     {
@@ -97,26 +102,14 @@ class Job
         return $this;
     }
 
-    public function getCategory(): ?JobCategory
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?JobCategory $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
 
         return $this;
     }
@@ -133,6 +126,18 @@ class Job
         return $this;
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     public function getWages(): ?string
     {
         return $this->wages;
@@ -145,74 +150,74 @@ class Job
         return $this;
     }
 
-    public function getAccommodationProvided(): ?bool
+    public function getAccommodation(): ?string
     {
-        return $this->accommodationProvided;
+        return $this->accommodation;
     }
 
-    public function setAccommodationProvided(?bool $accommodationProvided): self
+    public function setAccommodation(?string $accommodation): self
     {
-        $this->accommodationProvided = $accommodationProvided;
+        $this->accommodation = $accommodation;
 
         return $this;
     }
 
-    public function getSkiPassProvided(): ?bool
+    public function getSkipass(): ?string
     {
-        return $this->skiPassProvided;
+        return $this->skipass;
     }
 
-    public function setSkiPassProvided(?bool $skiPassProvided): self
+    public function setSkipass(?string $skipass): self
     {
-        $this->skiPassProvided = $skiPassProvided;
+        $this->skipass = $skipass;
 
         return $this;
     }
 
-    public function getEquipmentProvided(): ?bool
+    public function getEquipmenthire(): ?string
     {
-        return $this->equipmentProvided;
+        return $this->equipmenthire;
     }
 
-    public function setEquipmentProvided(?bool $equipmentProvided): self
+    public function setEquipmenthire(?string $equipmenthire): self
     {
-        $this->equipmentProvided = $equipmentProvided;
+        $this->equipmenthire = $equipmenthire;
 
         return $this;
     }
 
-    public function getFullBoard(): ?string
+    public function getFullboard(): ?string
     {
-        return $this->fullBoard;
+        return $this->fullboard;
     }
 
-    public function setFullBoard(?string $fullBoard): self
+    public function setFullboard(?string $fullboard): self
     {
-        $this->fullBoard = $fullBoard;
+        $this->fullboard = $fullboard;
 
         return $this;
     }
 
     public function getDateStart(): ?\DateTimeInterface
     {
-        return $this->dateStart;
+        return $this->date_start;
     }
 
-    public function setDateStart(?\DateTimeInterface $dateStart): self
+    public function setDateStart(?\DateTimeInterface $date_start): self
     {
-        $this->dateStart = $dateStart;
+        $this->date_start = $date_start;
 
         return $this;
     }
 
     public function getDateEnd(): ?\DateTimeInterface
     {
-        return $this->dateEnd;
+        return $this->date_end;
     }
 
-    public function setDateEnd(?\DateTimeInterface $dateEnd): self
+    public function setDateEnd(?\DateTimeInterface $date_start): self
     {
-        $this->dateEnd = $dateEnd;
+        $this->date_end = $date_end;
 
         return $this;
     }
@@ -225,6 +230,18 @@ class Job
     public function setRequirements(?string $requirements): self
     {
         $this->requirements = $requirements;
+
+        return $this;
+    }
+
+    public function getLanguages(): ?string
+    {
+        return $this->languages;
+    }
+
+    public function setLanguages(?string $languages): self
+    {
+        $this->languages = $languages;
 
         return $this;
     }
