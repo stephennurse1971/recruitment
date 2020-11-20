@@ -86,7 +86,7 @@ class Resort
 
     public function setMap_link(?string $map_link): self
     {
-        $this->mapLink = $map_link;
+        $this->map_link = $map_link;
 
         return $this;
     }

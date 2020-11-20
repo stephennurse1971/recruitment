@@ -1,0 +1,67 @@
+<!-- Main Sidebar Container -->
+
+
+<div class="wrapper float-left">
+    <div class="float-left">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+        <div class="sidebar-brand-icon rotate-n-15">
+        </div>
+        <div class="sidebar-brand-text mx-3">Ski recruitment</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+
+    <!-- Nav Item #1 - Employers -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployers"
+           aria-expanded="true" aria-controls="collapseEmployers">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Employers</span>
+        </a>
+        <div id="collapseEmployers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item text" href="">Employers</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item #1 - Job subcategories -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSettings"
+           aria-expanded="true" aria-controls="collapseSettings">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Job Settings</span>
+        </a>
+        <div id="collapseSettings" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item text" href="{{ path('country_index') }}">Countries</a>
+                <a class="collapse-item text" href="{{ path('resort_index') }}">Resorts</a>
+                <a class="collapse-item text" href="{{ path('category_index') }}">Categories</a>
+            </div>
+        </div>
+    </li>
+
+
+    <hr class="sidebar-divider">
+</ul>
+
+    </div>
+</div>
+
+
+
