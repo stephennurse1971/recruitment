@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}New Employer{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Create new Employer</h1>
+
+    {{ include('employer/_form.html.twig') }}
+
+    <a class="btn btn-outline-info" href="{{ path('employer_index') }}">Return to list</a>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Job index{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <h1>Job index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Wages</th>
+                <th>Accommodation</th>
+                <th>Skipass</th>
+                <th>Equipmenthire</th>
+                <th>Fullboard</th>
+                <th>Date_start</th>
+                <th>Date_end</th>
+                <th>Requirements</th>
+                <th>Languages</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+            <tr>
+                <td>{{ job.id }}</td>
+                <td>{{ job.description }}</td>
+                <td>{{ job.wages }}</td>
+                <td>{{ job.accommodation }}</td>
+                <td>{{ job.skipass }}</td>
+                <td>{{ job.equipmenthire }}</td>
+                <td>{{ job.fullboard }}</td>
+                <td>{{ job.dateStart ? job.dateStart|date('Y-m-d') : '' }}</td>
+                <td>{{ job.dateEnd ? job.dateEnd|date('Y-m-d') : '' }}</td>
+                <td>{{ job.requirements }}</td>
+                <td>{{ job.languages }}</td>
+                <td>
+                    <a href="{{ path('job_show', {'id': job.id}) }}">show</a>
+                    <a href="{{ path('job_edit', {'id': job.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-info" href="{{ path('job_new') }}">Add</a>
+{% endblock %}

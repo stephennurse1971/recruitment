@@ -30,10 +30,6 @@ class Resort
      */
     private $country;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $map_link;
 
     /**
      * @ORM\Column(type="text")
@@ -44,6 +40,11 @@ class Resort
      * @ORM\OneToMany(targetEntity=Job::class, mappedBy="resort", orphanRemoval=true)
      */
     private $job;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $map_link;
 
     public function __construct()
     {
@@ -79,17 +80,6 @@ class Resort
         return $this;
     }
 
-    public function getMap_link(): ?string
-    {
-        return $this->map_link;
-    }
-
-    public function setMap_link(?string $map_link): self
-    {
-        $this->map_link = $map_link;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -132,4 +122,26 @@ class Resort
 
         return $this;
     }
+
+    public function getMapLink(): ?string
+    {
+        return $this->map_link;
+    }
+
+    public function setMapLink(?string $map_link): self
+    {
+        $this->map_link = $map_link;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        // to show the name of the Category in the select
+        return $this->resort;
+        // to show the id of the Category in the select
+        // return $this->id;
+
+    }
+
+
 }

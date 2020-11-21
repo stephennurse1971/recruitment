@@ -9,7 +9,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Resort</th>
                 <th>Map_link</th>
                 <th>Description</th>
@@ -19,13 +18,12 @@
         <tbody>
         {% for resort in resorts %}
             <tr>
-                <td>{{ resort.id }}</td>
                 <td>{{ resort.resort }}</td>
                 <td>{{ resort.mapLink }}</td>
                 <td>{{ resort.description }}</td>
                 <td>
-                    <a href="{{ path('resort_show', {'id': resort.id}) }}">show</a>
-                    <a href="{{ path('resort_edit', {'id': resort.id}) }}">edit</a>
+                    <a class="btn btn-outline-success" href="{{ path('resort_show', {'id': resort.id}) }}">Show</a>
+                    <a class="btn btn-outline-danger" href="{{ path('resort_edit', {'id': resort.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -36,5 +34,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('resort_new') }}">Create new</a>
+    <a class="btn btn-outline-success" href="{{ path('resort_new') }}">Add</a>
 {% endblock %}

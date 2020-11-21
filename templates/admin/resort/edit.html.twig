@@ -1,13 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Edit Resort{% endblock %}
 
-{% block body %}
+{% block content %}
+    {{ parent() }}
     <h1>Edit Resort</h1>
 
-    {{ include('resort/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/resort/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('resort_index') }}">back to list</a>
+    <a class="btn-outline-success" href="{{ path('resort_index') }}">Return to list</a>
 
-    {{ include('resort/_delete_form.html.twig') }}
+    {{ include('admin/resort/_delete_form.html.twig') }}
 {% endblock %}

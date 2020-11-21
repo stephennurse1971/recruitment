@@ -1,0 +1,48 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Employer index{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <h1>Employer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Company_name</th>
+                <th>First_name</th>
+                <th>Last_name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Address1</th>
+                <th>Address2</th>
+                <th>Telephone</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employer in employers %}
+            <tr>
+                <td>{{ employer.companyName }}</td>
+                <td>{{ employer.firstName }}</td>
+                <td>{{ employer.lastName }}</td>
+                <td>{{ employer.email }}</td>
+                <td>{{ employer.password }}</td>
+                <td>{{ employer.address1 }}</td>
+                <td>{{ employer.address2 }}</td>
+                <td>{{ employer.telephone }}</td>
+                <td>
+                    <a class="btn btn-outline-info" href="{{ path('employer_show', {'id': employer.id}) }}">Show</a>
+                    <a class="btn btn-outline-danger" href="{{ path('employer_edit', {'id': employer.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-success" href="{{ path('employer_new') }}">Add</a>
+{% endblock %}
