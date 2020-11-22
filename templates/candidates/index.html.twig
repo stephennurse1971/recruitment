@@ -1,0 +1,51 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Candidates index{% endblock %}
+
+{% block content %}
+    <h1>Candidates index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>DateOfBirth</th>
+                <th>Nationality</th>
+                <th>PreviousSeasonnaire</th>
+                <th>DateFrom</th>
+                <th>DateTo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidate in candidates %}
+            <tr>
+                <td>{{ candidate.id }}</td>
+                <td>{{ candidate.name }}</td>
+                <td>{{ candidate.email }}</td>
+                <td>{{ candidate.phone }}</td>
+                <td>{{ candidate.address }}</td>
+                <td>{{ candidate.dateOfBirth ? candidate.dateOfBirth|date('Y-m-d') : '' }}</td>
+                <td>{{ candidate.nationality }}</td>
+                <td>{{ candidate.previousSeasonnaire }}</td>
+                <td>{{ candidate.DateFrom ? candidate.DateFrom|date('Y-m-d') : '' }}</td>
+                <td>{{ candidate.dateTo ? candidate.dateTo|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a class="btn btn-outline-info" href="{{ path('candidates_show', {'id': candidate.id}) }}">Show</a>
+                    <a class="btn btn-outline-danger" href="{{ path('candidates_edit', {'id': candidate.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-info" href="{{ path('candidates_new') }}">Add</a>
+{% endblock %}

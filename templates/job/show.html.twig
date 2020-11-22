@@ -3,60 +3,67 @@
 {% block title %}Job{% endblock %}
 
 {% block content %}
-    {{ parent() }}
     <h1>Job</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ job.id }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ job.description }}</td>
-            </tr>
-            <tr>
-                <th>Wages</th>
-                <td>{{ job.wages }}</td>
-            </tr>
-            <tr>
-                <th>Accommodation</th>
-                <td>{{ job.accommodation }}</td>
-            </tr>
-            <tr>
-                <th>Skipass</th>
-                <td>{{ job.skipass }}</td>
-            </tr>
-            <tr>
-                <th>Equipmenthire</th>
-                <td>{{ job.equipmenthire }}</td>
-            </tr>
-            <tr>
-                <th>Fullboard</th>
-                <td>{{ job.fullboard }}</td>
-            </tr>
-            <tr>
-                <th>Date_start</th>
-                <td>{{ job.dateStart ? job.dateStart|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Date_end</th>
-                <td>{{ job.dateEnd ? job.dateEnd|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Requirements</th>
-                <td>{{ job.requirements }}</td>
-            </tr>
-            <tr>
-                <th>Languages</th>
-                <td>{{ job.languages }}</td>
-            </tr>
+
+        <tr>
+            <th>Employer</th>
+            <td>{{ job.employer }}</td>
+        </tr>
+        <tr>
+            <th>Resort</th>
+            <td>{{ job.resort }}</td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>{{ job.category }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ job.description }}</td>
+        </tr>
+        <tr>
+            <th>Date_start</th>
+            <td>{{ job.dateStart ? job.dateStart|date('d-M-y') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Date_end</th>
+            <td>{{ job.dateEnd ? job.dateEnd|date('d-M-y') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Wages</th>
+            <td>{{ job.wages }}</td>
+        </tr>
+        <tr>
+            <th>Accommodation</th>
+            <td>{{ job.accommodation }}</td>
+        </tr>
+        <tr>
+            <th>Fullboard</th>
+            <td>{{ job.fullboard }}</td>
+        </tr>
+        <tr>
+            <th>Skipass</th>
+            <td>{{ job.skipass }}</td>
+        </tr>
+        <tr>
+            <th>Equipmenthire</th>
+            <td>{{ job.equipmenthire }}</td>
+        </tr>
+        <tr>
+            <th>Requirements</th>
+            <td>{{ job.requirements }}</td>
+        </tr>
+        <tr>
+            <th>Languages</th>
+            <td>{{ job.languages }}</td>
+        </tr>
         </tbody>
     </table>
 
     <a class="btn btn-outline-info" href="{{ path('job_index') }}">Return to list</a>
-
     <a class="btn btn-outline-danger" href="{{ path('job_edit', {'id': job.id}) }}">Edit</a>
 
     {{ include('job/_delete_form.html.twig') }}
