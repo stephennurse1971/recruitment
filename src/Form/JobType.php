@@ -18,57 +18,61 @@ class JobType extends AbstractType
             ->add('employer')
             ->add('category')
             ->add('resort')
-            ->add('description',TextType::class, [
-                'label' => 'Description of role'])
-            ->add('date_start',DateType::class, [
-                'widget' => 'single_text'
-
-                ])
-            ->add('date_end',DateType::class, [
-                    'widget' => 'single_text']
-
+            ->add('description', TextType::class, [
+                'label' => 'Description of role', ])
+            ->add('date_start', DateType::class, [
+                'widget' => 'single_text',
+            ])
+            ->add(
+                'date_end',
+                DateType::class,
+                [
+                    'widget' => 'single_text',
+                    'html5' => false,
+                    'attr' => ['class' => 'form-control input-inline js-datepicker',
+                        'data-provide' => 'datetimepicker',
+                    ],
+                ]
             )
 
             ->add('requirements')
-            ->add('languages',ChoiceType::class, [
-                'label' => "Languages required",
+            ->add('languages', ChoiceType::class, [
+                'label' => 'Languages required',
                 'choices' => [
                     'English' => 'English',
                     'French' => 'French',
                     'German' => 'German',
-                ]
+                ],
             ])
             ->add('wages')
-            ->add('accommodation',ChoiceType::class, [
-                'label' => "Is accommodation provided",
+            ->add('accommodation', ChoiceType::class, [
+                'label' => 'Is accommodation provided',
                 'choices' => [
                     'Yes' => true,
                     'No' => false,
-                ]
+                ],
             ])
             ->add('skipass', ChoiceType::class, [
-                'label' => "Is a ski pass provided",
+                'label' => 'Is a ski pass provided',
                 'choices' => [
                     'Yes' => true,
                     'No' => false,
-                ]
+                ],
             ])
-            ->add('equipmenthire',ChoiceType::class, [
-                'label' => "Is ski equipment provided",
+            ->add('equipmenthire', ChoiceType::class, [
+                'label' => 'Is ski equipment provided',
                 'choices' => [
                     'Yes' => true,
                     'No' => false,
-                ]
+                ],
             ])
             ->add('fullboard', ChoiceType::class, [
-                'label' => "Is fullboard provided",
+                'label' => 'Is fullboard provided',
                 'choices' => [
                     'Yes' => true,
                     'No' => false,
-                ]
+                ],
             ])
-
-
 
         ;
     }

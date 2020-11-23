@@ -55,7 +55,7 @@ class Candidates
     private $previousSeasonnaire;
 
     /**
-     * @ORM\OneToMany(targetEntity=category::class, mappedBy="candidates")
+     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="candidates")
      */
     private $Category;
 
@@ -182,7 +182,7 @@ class Candidates
     }
 
     /**
-     * @return Collection|category[]
+     * @return category[]|Collection
      */
     public function getCategory(): Collection
     {
