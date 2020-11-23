@@ -30,18 +30,11 @@ class JobController extends AbstractController
      */
     public function new(Request $request): Response
     {
-       // $today = new \DateTime('now');
-        //$today ->setTime('12', '00');
-
         $job = new Job();
-       // $job->setDateStart($today);
-      //  $job->setDateEnd($today);
         $form = $this->createForm(JobType::class, $job);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($job);
             $entityManager->flush();

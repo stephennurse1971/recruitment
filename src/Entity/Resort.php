@@ -46,6 +46,11 @@ class Resort
      */
     private $map_link;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Candidates::class, inversedBy="resort")
+     */
+    private $candidates;
+
     public function __construct()
     {
         $this->job = new ArrayCollection();
@@ -141,6 +146,18 @@ class Resort
         // to show the id of the Category in the select
         // return $this->id;
 
+    }
+
+    public function getCandidates(): ?Candidates
+    {
+        return $this->candidates;
+    }
+
+    public function setCandidates(?Candidates $candidates): self
+    {
+        $this->candidates = $candidates;
+
+        return $this;
     }
 
 

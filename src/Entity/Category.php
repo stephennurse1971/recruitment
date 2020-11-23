@@ -29,6 +29,16 @@ class Category
      */
     private $job;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Candidates::class, inversedBy="Category")
+     */
+    private $candidates;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Candidates::class, inversedBy="category")
+     */
+    private $catgoryCandidate;
+
     public function __construct()
     {
         $this->job = new ArrayCollection();
@@ -89,5 +99,29 @@ class Category
         // return $this->id;
 
 
+    }
+
+    public function getCandidates(): ?Candidates
+    {
+        return $this->candidates;
+    }
+
+    public function setCandidates(?Candidates $candidates): self
+    {
+        $this->candidates = $candidates;
+
+        return $this;
+    }
+
+    public function getCatgoryCandidate(): ?Candidates
+    {
+        return $this->catgoryCandidate;
+    }
+
+    public function setCatgoryCandidate(?Candidates $catgoryCandidate): self
+    {
+        $this->catgoryCandidate = $catgoryCandidate;
+
+        return $this;
     }
 }

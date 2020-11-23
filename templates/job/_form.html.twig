@@ -6,6 +6,7 @@
        {{ form_row(form.description) }}
        {{ form_row(form.requirements) }}
        {{ form_row(form.wages) }}
+        {{ form_row(form.languages) }}
 
 <div class="row">
     <div class="col-3">{{ form_row(form.date_start) }}</div>
@@ -18,9 +19,5 @@
     <div class="col-3">  {{ form_row(form.equipmenthire) }} </div>
     <div class="col-3">  {{ form_row(form.fullboard) }} </div>
 </div>
-
-
-<!--{{ form_widget(form) }}-->
 <button class="btn btn-info">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
-

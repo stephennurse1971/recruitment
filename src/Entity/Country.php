@@ -22,6 +22,11 @@ class Country
      */
     private $country;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Candidates::class, inversedBy="country")
+     */
+    private $candidates;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,5 +50,17 @@ class Country
         // to show the id of the Category in the select
         // return $this->id;
 
+    }
+
+    public function getCandidates(): ?Candidates
+    {
+        return $this->candidates;
+    }
+
+    public function setCandidates(?Candidates $candidates): self
+    {
+        $this->candidates = $candidates;
+
+        return $this;
     }
 }
