@@ -12,8 +12,9 @@ class ResortType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('resort')
+            ->add('map_link')
             ->add('description')
-            ->add('maplink')
             ->add('country')
         ;
     }

@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Resort index{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <h1>Resort index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Resort</th>
+                <th>Map_link</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for resort in resorts %}
+            <tr>
+                <td>{{ resort.resort }}</td>
+                <td>{{ resort.mapLink }}</td>
+                <td>{{ resort.description }}</td>
+                <td>
+                    <a class="btn btn-outline-success" href="{{ path('resort_show', {'id': resort.id}) }}">Show</a>
+                    <a class="btn btn-outline-danger" href="{{ path('resort_edit', {'id': resort.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-success" href="{{ path('resort_new') }}">Add</a>
+{% endblock %}

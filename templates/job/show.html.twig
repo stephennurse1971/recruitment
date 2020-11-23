@@ -1,8 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Job{% endblock %}
 
-{% block body %}
+{% block content %}
+    {{ parent() }}
     <h1>Job</h1>
 
     <table class="table">
@@ -20,39 +21,43 @@
                 <td>{{ job.wages }}</td>
             </tr>
             <tr>
-                <th>AccommodationProvided</th>
-                <td>{{ job.accommodationProvided ? 'Yes' : 'No' }}</td>
+                <th>Accommodation</th>
+                <td>{{ job.accommodation }}</td>
             </tr>
             <tr>
-                <th>SkiPassProvided</th>
-                <td>{{ job.skiPassProvided ? 'Yes' : 'No' }}</td>
+                <th>Skipass</th>
+                <td>{{ job.skipass }}</td>
             </tr>
             <tr>
-                <th>EquipmentProvided</th>
-                <td>{{ job.equipmentProvided ? 'Yes' : 'No' }}</td>
+                <th>Equipmenthire</th>
+                <td>{{ job.equipmenthire }}</td>
             </tr>
             <tr>
-                <th>FullBoard</th>
-                <td>{{ job.fullBoard }}</td>
+                <th>Fullboard</th>
+                <td>{{ job.fullboard }}</td>
             </tr>
             <tr>
-                <th>DateStart</th>
+                <th>Date_start</th>
                 <td>{{ job.dateStart ? job.dateStart|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>DateEnd</th>
+                <th>Date_end</th>
                 <td>{{ job.dateEnd ? job.dateEnd|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
                 <th>Requirements</th>
                 <td>{{ job.requirements }}</td>
             </tr>
+            <tr>
+                <th>Languages</th>
+                <td>{{ job.languages }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('job_index') }}">back to list</a>
+    <a class="btn btn-outline-info" href="{{ path('job_index') }}">Return to list</a>
 
-    <a href="{{ path('job_edit', {'id': job.id}) }}">edit</a>
+    <a class="btn btn-outline-danger" href="{{ path('job_edit', {'id': job.id}) }}">Edit</a>
 
     {{ include('job/_delete_form.html.twig') }}
 {% endblock %}

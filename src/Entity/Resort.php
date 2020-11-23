@@ -20,34 +20,52 @@ class Resort
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $resort;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Country::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $country;
 
+
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $maplink;
-
-    /**
      * @ORM\OneToMany(targetEntity=Job::class, mappedBy="resort", orphanRemoval=true)
      */
-    private $jobs;
+    private $job;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $map_link;
 
     public function __construct()
     {
-        $this->jobs = new ArrayCollection();
+        $this->job = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getResort(): ?string
+    {
+        return $this->resort;
+    }
+
+    public function setResort(string $resort): self
+    {
+        $this->resort = $resort;
+
+        return $this;
     }
 
     public function getCountry(): ?Country
@@ -62,26 +80,15 @@ class Resort
         return $this;
     }
 
+
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getMaplink(): ?string
-    {
-        return $this->maplink;
-    }
-
-    public function setMaplink(?string $maplink): self
-    {
-        $this->maplink = $maplink;
 
         return $this;
     }
@@ -89,15 +96,15 @@ class Resort
     /**
      * @return Collection|Job[]
      */
-    public function getJobs(): Collection
+    public function getJob(): Collection
     {
-        return $this->jobs;
+        return $this->job;
     }
 
     public function addJob(Job $job): self
     {
-        if (!$this->jobs->contains($job)) {
-            $this->jobs[] = $job;
+        if (!$this->job->contains($job)) {
+            $this->job[] = $job;
             $job->setResort($this);
         }
 
@@ -106,7 +113,7 @@ class Resort
 
     public function removeJob(Job $job): self
     {
-        if ($this->jobs->removeElement($job)) {
+        if ($this->job->removeElement($job)) {
             // set the owning side to null (unless already changed)
             if ($job->getResort() === $this) {
                 $job->setResort(null);
@@ -115,4 +122,26 @@ class Resort
 
         return $this;
     }
+
+    public function getMapLink(): ?string
+    {
+        return $this->map_link;
+    }
+
+    public function setMapLink(?string $map_link): self
+    {
+        $this->map_link = $map_link;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        // to show the name of the Category in the select
+        return $this->resort;
+        // to show the id of the Category in the select
+        // return $this->id;
+
+    }
+
+
 }

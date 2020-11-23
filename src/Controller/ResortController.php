@@ -20,7 +20,7 @@ class ResortController extends AbstractController
      */
     public function index(ResortRepository $resortRepository): Response
     {
-        return $this->render('resort/index.html.twig', [
+        return $this->render('admin/resort/index.html.twig', [
             'resorts' => $resortRepository->findAll(),
         ]);
     }
@@ -42,7 +42,7 @@ class ResortController extends AbstractController
             return $this->redirectToRoute('resort_index');
         }
 
-        return $this->render('resort/new.html.twig', [
+        return $this->render('admin/resort/new.html.twig', [
             'resort' => $resort,
             'form' => $form->createView(),
         ]);

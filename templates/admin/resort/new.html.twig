@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}New Resort{% endblock %}
+
+{% block content %}
+  {{ parent() }}
+    <h1>Create new Resort</h1>
+
+    {{ include('admin/resort/_form.html.twig') }}
+
+    <a class="btn btn-outline-success" href="{{ path('resort_index') }}">Return to list</a>
+{% endblock %}
