@@ -22,22 +22,12 @@ class Employer
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $first_name;
+    private $contact_name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $last_name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
+
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -64,6 +54,12 @@ class Employer
      */
     private $job;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user_id;
+
     public function __construct()
     {
         $this->job = new ArrayCollection();
@@ -74,53 +70,18 @@ class Employer
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getContactName(): ?string
     {
-        return $this->first_name;
+        return $this->contact_name;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setContactName(string $contact_name): self
     {
-        $this->first_name = $first_name;
+        $this->contact_name = $contact_name;
 
         return $this;
     }
 
-    public function getLastName(): ?string
-    {
-        return $this->last_name;
-    }
-
-    public function setLastName(string $last_name): self
-    {
-        $this->last_name = $last_name;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
 
     public function getCompanyName(): ?string
     {
@@ -206,5 +167,16 @@ class Employer
         // to show the id of the Category in the select
         // return $this->id;
 
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(User $user_id): self
+    {
+        $this->user_id = $user_id;
+        return $this;
     }
 }
