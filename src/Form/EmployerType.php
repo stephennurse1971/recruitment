@@ -4,11 +4,8 @@ namespace App\Form;
 
 use App\Entity\Employer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,19 +14,17 @@ class EmployerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name', TextType::class)
-            ->add('last_name', TextType::class)
-            ->add('email',EmailType::class)
+            ->add('contact_name')
+            ->add('email')
             ->add('password',RepeatedType::class,[
                 'type'=>PasswordType::class,
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Confirm Password'],
             ])
-            ->add('company_name', TextType::class)
-            ->add('address1', TextType::class)
-            ->add('address2', TextType::class)
-            ->add('telephone', TextType::class)
-            ->add('Register', SubmitType::class)
+            ->add('company_name')
+            ->add('address1')
+            ->add('address2')
+            ->add('telephone')
         ;
     }
 

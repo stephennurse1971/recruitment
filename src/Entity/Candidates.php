@@ -55,7 +55,7 @@ class Candidates
     private $previousSeasonnaire;
 
     /**
-     * @ORM\OneToMany(targetEntity=category::class, mappedBy="candidates")
+     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="candidates")
      */
     private $Category;
 
