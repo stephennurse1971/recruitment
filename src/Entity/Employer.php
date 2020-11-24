@@ -24,11 +24,6 @@ class Employer
      */
     private $contact_name;
 
-
-
-
-
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -55,14 +50,22 @@ class Employer
     private $job;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="employers")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id",nullable=false)
      */
-    private $user_id;
+    private $User;
 
     public function __construct()
     {
         $this->job = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        // to show the name of the Category in the select
+        return $this->company_name;
+        // to show the id of the Category in the select
+        // return $this->id;
     }
 
     public function getId(): ?int
@@ -81,7 +84,6 @@ class Employer
 
         return $this;
     }
-
 
     public function getCompanyName(): ?string
     {
@@ -160,23 +162,16 @@ class Employer
 
         return $this;
     }
-    public function __toString()
-    {
-        // to show the name of the Category in the select
-        return $this->company_name;
-        // to show the id of the Category in the select
-        // return $this->id;
 
+    public function getUser(): ?User
+    {
+        return $this->User;
     }
 
-    public function getUserId(): ?User
+    public function setUser(?User $User): self
     {
-        return $this->user_id;
-    }
+        $this->User = $User;
 
-    public function setUserId(User $user_id): self
-    {
-        $this->user_id = $user_id;
         return $this;
     }
 }

@@ -6,6 +6,7 @@ use App\Entity\Employer;
 use App\Entity\User;
 use App\Form\EmployerType;
 use App\Repository\EmployerRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,18 +33,17 @@ class EmployerController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $employer = new Employer();
+        // $employer = new Employer();
         $user = new User();
 
-        if ($request->isMethod("POST")) {
+        if ($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            // get post request values
             $email = $request->request->get('email');
             $password = $request->request->get('password');
-            $contactName = $request->request->get('contact_name');
-            $companyName = $request->request->get('company_name');
-            $address1 = $request->request->get('address1');
-            $address2 = $request->request->get('address2');
-            $telephone = $request->request->get('telephone');
+
+            // set user
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -51,25 +51,22 @@ class EmployerController extends AbstractController
                 )
             );
             $user->setEmail($email);
+            $roles = ['ROLE_EMPLOYER'];
+            $user->setRoles($roles);
+
+            // save user
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $last_id = $user->getId();
-            // Saving employer data
-            if($last_id)
-            {
-                $employer->setContactName($contactName);
-                $employer->setCompanyName($companyName);
-                $employer->setAddress1($address1);
-                $employer->setAddress2($address2);
-                $employer->setTelephone($telephone);
-                $employer->setUserId();
-                $entityManager->persist($employer);
-                $entityManager->flush();
-                return $this->redirectToRoute('app_logi');
-            }
+            // Save employer
+            if ($user) {
+                $this->register($request, $entityManager, $user);
 
+                //redirect to login route after succesfull registration
+                return $this->redirectToRoute('app_login');
+            }
         }
+
         return $this->render('employer/new.html.twig');
     }
 
@@ -115,5 +112,33 @@ class EmployerController extends AbstractController
         }
 
         return $this->redirectToRoute('employer_index');
+    }
+
+    public function register(Request $request, EntityManager $entityManager, User $user)
+    {
+        $employer = new Employer();
+        // $entityManager = $this->entityManager;
+        // $request = $this->request;
+        // $user = $this->user;
+        // get all post values
+        $contactName = $request->request->get('contact_name');
+        $companyName = $request->request->get('company_name');
+        $address1 = $request->request->get('address1');
+        $address2 = $request->request->get('address2');
+        $telephone = $request->request->get('telephone');
+
+        //set employer
+        $employer->setContactName($contactName);
+        $employer->setCompanyName($companyName);
+        $employer->setAddress1($address1);
+        $employer->setAddress2($address2);
+        $employer->setTelephone($telephone);
+
+        //save employer
+        $employer->setUser($user);
+        $entityManager->persist($employer);
+        $entityManager->flush();
+
+        return null;
     }
 }

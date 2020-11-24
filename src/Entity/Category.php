@@ -44,6 +44,14 @@ class Category
         $this->job = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        // to show the name of the Category in the select
+        return $this->category;
+        // to show the id of the Category in the select
+        // return $this->id;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,16 +97,6 @@ class Category
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        // to show the name of the Category in the select
-        return $this->category;
-        // to show the id of the Category in the select
-        // return $this->id;
-
-
     }
 
     public function getCandidates(): ?Candidates
