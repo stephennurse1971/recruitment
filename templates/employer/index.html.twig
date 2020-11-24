@@ -10,10 +10,8 @@
         <thead>
             <tr>
                 <th>Company_name</th>
-                <th>First_name</th>
-                <th>Last_name</th>
                 <th>Email</th>
-                <th>Password</th>
+                <th>Contact_name</th>
                 <th>Address1</th>
                 <th>Address2</th>
                 <th>Telephone</th>
@@ -23,19 +21,13 @@
         <tbody>
         {% for employer in employers %}
             <tr>
-                <td>{{ employer.companyName }}</td>
-                <td>{{ employer.firstName }}</td>
-                <td>{{ employer.lastName }}</td>
-                <td>{{ employer.email }}</td>
-                <td>{{ employer.password }}</td>
+                <td><a href="{{ path('employer_edit', {'id': employer.id}) }}">  {{ employer.companyName }}</a></td>
+                <td>{{ employer.user.email }}</td>
+                <td>{{ employer.contactName }}</td>
                 <td>{{ employer.address1 }}</td>
                 <td>{{ employer.address2 }}</td>
                 <td>{{ employer.telephone }}</td>
-                <td>
-                    <a class="btn btn-outline-info" href="{{ path('employer_show', {'id': employer.id}) }}">Show</a>
-                    <a class="btn btn-outline-danger" href="{{ path('employer_edit', {'id': employer.id}) }}">Edit</a>
-                </td>
-            </tr>
+                         </tr>
         {% else %}
             <tr>
                 <td colspan="10">no records found</td>

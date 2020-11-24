@@ -23,9 +23,9 @@ class EmployerController extends AbstractController
      */
     public function index(EmployerRepository $employerRepository): Response
     {
-        return $this->render('employer/index.html.twig', [
+         return $this->render('employer/index.html.twig', [
             'employers' => $employerRepository->findAll(),
-        ]);
+         ]);
     }
 
     /**

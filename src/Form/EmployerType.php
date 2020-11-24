@@ -15,12 +15,6 @@ class EmployerType extends AbstractType
     {
         $builder
             ->add('contact_name')
-            ->add('email')
-            ->add('password',RepeatedType::class,[
-                'type'=>PasswordType::class,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Confirm Password'],
-            ])
             ->add('company_name')
             ->add('address1')
             ->add('address2')

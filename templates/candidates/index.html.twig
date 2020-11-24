@@ -32,7 +32,7 @@
                 <td>{{ candidate.dateOfBirth ? candidate.dateOfBirth|date('Y-m-d') : '' }}</td>
                 <td>{{ candidate.nationality }}</td>
                 <td>{{ candidate.previousSeasonnaire }}</td>
-                <td>{{ candidate.DateFrom ? candidate.DateFrom|date('Y-m-d') : '' }}</td>
+                <td>{{ candidate.dateFrom ? candidate.dateFrom|date('Y-m-d') : '' }}</td>
                 <td>{{ candidate.dateTo ? candidate.dateTo|date('Y-m-d') : '' }}</td>
                 <td>
                     <a class="btn btn-outline-info" href="{{ path('candidates_show', {'id': candidate.id}) }}">Show</a>
