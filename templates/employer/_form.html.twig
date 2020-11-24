@@ -1,4 +1,29 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<form METHOD="post">
+    <div class="form-group">
+        <input type="text" name='email' placeholder='email' class="form-control">
+    </div>
+
+    <div class="form-group">
+        <input type="password" name='password' placeholder='password'class="form-control">
+    </div>
+
+    <div class="form-group">
+        <input type="text" name='company_name' placeholder='company name'class="form-control">
+    </div>
+
+    <div class="form-group">
+        <input type="text" name='contact_name' placeholder='contact'class="form-control">
+    </div>
+
+    <div class="form-group">
+        <input type="text" name='address1' placeholder='address1'class="form-control">
+    </div>
+
+    <div class="form-group">
+        <input type="text" name='telephone' placeholder='telephone'class="form-control">
+    </div>
+
+    <div class="form-group">
+        <input type="submit" name='Save' value="Save" class="btn btn-outline-info">
+    </div>
+</form>

@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Employer;
-use App\Form\Employer1Type;
+use App\Entity\User;
+use App\Form\EmployerType;
 use App\Repository\EmployerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/employer")
@@ -26,26 +28,49 @@ class EmployerController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="employer_new", methods={"GET","POST"})
+     * @Route("/register", name="employer_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $employer = new Employer();
-        $form = $this->createForm(Employer1Type::class, $employer);
-        $form->handleRequest($request);
+        $user = new User();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($request->isMethod("POST")) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($employer);
+            $email = $request->request->get('email');
+            $password = $request->request->get('password');
+            $contactName = $request->request->get('contact_name');
+            $companyName = $request->request->get('company_name');
+            $address1 = $request->request->get('address1');
+            $address2 = $request->request->get('address2');
+            $telephone = $request->request->get('telephone');
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $password
+                )
+            );
+            $user->setEmail($email);
+            $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('employer_index');
-        }
+            $last_id = $user->getId();
+            // Saving employer data
+            if($last_id)
+            {
+                $employer->setContactName($contactName);
+                $employer->setCompanyName($companyName);
+                $employer->setAddress1($address1);
+                $employer->setAddress2($address2);
+                $employer->setTelephone($telephone);
+                $employer->setUserId();
+                $entityManager->persist($employer);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_logi');
+            }
 
-        return $this->render('employer/new.html.twig', [
-            'employer' => $employer,
-            'form' => $form->createView(),
-        ]);
+        }
+        return $this->render('employer/new.html.twig');
     }
 
     /**
@@ -63,7 +88,7 @@ class EmployerController extends AbstractController
      */
     public function edit(Request $request, Employer $employer): Response
     {
-        $form = $this->createForm(Employer1Type::class, $employer);
+        $form = $this->createForm(EmployerType::class, $employer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
