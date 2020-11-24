@@ -13,14 +13,14 @@ class CandidatesType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('email')
-            ->add('phone')
+            ->add('email',RegistrationFormType::class)
+          /*  ->add('phone')
             ->add('address')
             ->add('dateOfBirth')
             ->add('nationality')
             ->add('previousSeasonnaire')
             ->add('DateFrom')
-            ->add('dateTo')
+            ->add('dateTo')*/
         ;
     }
 

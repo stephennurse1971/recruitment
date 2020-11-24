@@ -22,10 +22,14 @@ class Country
      */
     private $country;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Candidates::class, inversedBy="country")
-     */
-    private $candidates;
+
+    public function __toString()
+    {
+        // to show the name of the Category in the select
+        return $this->country;
+        // to show the id of the Category in the select
+        // return $this->id;
+    }
 
     public function getId(): ?int
     {
@@ -43,24 +47,5 @@ class Country
 
         return $this;
     }
-    public function __toString()
-    {
-        // to show the name of the Category in the select
-        return $this->country;
-        // to show the id of the Category in the select
-        // return $this->id;
 
-    }
-
-    public function getCandidates(): ?Candidates
-    {
-        return $this->candidates;
-    }
-
-    public function setCandidates(?Candidates $candidates): self
-    {
-        $this->candidates = $candidates;
-
-        return $this;
-    }
 }

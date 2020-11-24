@@ -22,22 +22,7 @@ class Employer
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $first_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $last_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
+    private $contact_name;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -64,9 +49,23 @@ class Employer
      */
     private $job;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="employers")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id",nullable=false)
+     */
+    private $User;
+
     public function __construct()
     {
         $this->job = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        // to show the name of the Category in the select
+        return $this->company_name;
+        // to show the id of the Category in the select
+        // return $this->id;
     }
 
     public function getId(): ?int
@@ -74,50 +73,14 @@ class Employer
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getContactName(): ?string
     {
-        return $this->first_name;
+        return $this->contact_name;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setContactName(string $contact_name): self
     {
-        $this->first_name = $first_name;
-
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->last_name;
-    }
-
-    public function setLastName(string $last_name): self
-    {
-        $this->last_name = $last_name;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
+        $this->contact_name = $contact_name;
 
         return $this;
     }
@@ -199,12 +162,16 @@ class Employer
 
         return $this;
     }
-    public function __toString()
-    {
-        // to show the name of the Category in the select
-        return $this->company_name;
-        // to show the id of the Category in the select
-        // return $this->id;
 
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
+
+        return $this;
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,6 +37,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Employer::class, mappedBy="User")
+     */
+    private $employers;
+
+    public function __construct()
+    {
+        $this->employers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,7 +82,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        //$roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -112,5 +124,35 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Employer[]
+     */
+    public function getEmployers(): Collection
+    {
+        return $this->employers;
+    }
+
+    public function addEmployer(Employer $employer): self
+    {
+        if (!$this->employers->contains($employer)) {
+            $this->employers[] = $employer;
+            $employer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmployer(Employer $employer): self
+    {
+        if ($this->employers->removeElement($employer)) {
+            // set the owning side to null (unless already changed)
+            if ($employer->getUser() === $this) {
+                $employer->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -30,18 +30,23 @@ class Category
     private $job;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Candidates::class, inversedBy="Category")
+     * @ORM\ManyToMany(targetEntity=Candidates::class, mappedBy="category")
      */
     private $candidates;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Candidates::class, inversedBy="category")
-     */
-    private $catgoryCandidate;
 
     public function __construct()
     {
         $this->job = new ArrayCollection();
+        $this->candidates = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        // to show the name of the Category in the select
+        return $this->category;
+        // to show the id of the Category in the select
+        // return $this->id;
     }
 
     public function getId(): ?int
@@ -91,37 +96,31 @@ class Category
         return $this;
     }
 
-    public function __toString()
-    {
-        // to show the name of the Category in the select
-        return $this->category;
-        // to show the id of the Category in the select
-        // return $this->id;
-
-
-    }
-
-    public function getCandidates(): ?Candidates
+    /**
+     * @return Collection|Candidates[]
+     */
+    public function getCandidates(): Collection
     {
         return $this->candidates;
     }
 
-    public function setCandidates(?Candidates $candidates): self
+    public function addCandidate(Candidates $candidate): self
     {
-        $this->candidates = $candidates;
+        if (!$this->candidates->contains($candidate)) {
+            $this->candidates[] = $candidate;
+            $candidate->addCategory($this);
+        }
 
         return $this;
     }
 
-    public function getCatgoryCandidate(): ?Candidates
+    public function removeCandidate(Candidates $candidate): self
     {
-        return $this->catgoryCandidate;
-    }
-
-    public function setCatgoryCandidate(?Candidates $catgoryCandidate): self
-    {
-        $this->catgoryCandidate = $catgoryCandidate;
+        if ($this->candidates->removeElement($candidate)) {
+            $candidate->removeCategory($this);
+        }
 
         return $this;
     }
+
 }

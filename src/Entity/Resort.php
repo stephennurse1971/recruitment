@@ -47,13 +47,15 @@ class Resort
     private $map_link;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Candidates::class, inversedBy="resort")
+     * @ORM\ManyToMany(targetEntity=Candidates::class, mappedBy="resort")
      */
     private $candidates;
+
 
     public function __construct()
     {
         $this->job = new ArrayCollection();
+        $this->candidates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,17 +150,30 @@ class Resort
 
     }
 
-    public function getCandidates(): ?Candidates
+    /**
+     * @return Collection|Candidates[]
+     */
+    public function getCandidates(): Collection
     {
         return $this->candidates;
     }
 
-    public function setCandidates(?Candidates $candidates): self
+    public function addCandidate(Candidates $candidate): self
     {
-        $this->candidates = $candidates;
+        if (!$this->candidates->contains($candidate)) {
+            $this->candidates[] = $candidate;
+            $candidate->addResort($this);
+        }
 
         return $this;
     }
 
+    public function removeCandidate(Candidates $candidate): self
+    {
+        if ($this->candidates->removeElement($candidate)) {
+            $candidate->removeResort($this);
+        }
 
+        return $this;
+    }
 }

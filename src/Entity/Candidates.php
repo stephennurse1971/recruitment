@@ -24,10 +24,6 @@ class Candidates
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -54,20 +50,6 @@ class Candidates
      */
     private $previousSeasonnaire;
 
-    /**
-     * @ORM\OneToMany(targetEntity=category::class, mappedBy="candidates")
-     */
-    private $Category;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Country::class, mappedBy="candidates")
-     */
-    private $country;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Resort::class, mappedBy="candidates")
-     */
-    private $resort;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -80,14 +62,25 @@ class Candidates
     private $dateTo;
 
     /**
-     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="catgoryCandidate")
+     * @ORM\ManyToMany(targetEntity=Resort::class, inversedBy="candidates")
+     */
+    private $resort;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="candidates")
      */
     private $category;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+
+
     public function __construct()
     {
-        $this->Category = new ArrayCollection();
-        $this->country = new ArrayCollection();
         $this->resort = new ArrayCollection();
         $this->category = new ArrayCollection();
     }
@@ -105,18 +98,6 @@ class Candidates
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }
@@ -181,97 +162,8 @@ class Candidates
         return $this;
     }
 
-    /**
-     * @return Collection|category[]
-     */
-    public function getCategory(): Collection
-    {
-        return $this->Category;
-    }
 
-    public function addCategory(category $category): self
-    {
-        if (!$this->Category->contains($category)) {
-            $this->Category[] = $category;
-            $category->setCandidates($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(category $category): self
-    {
-        if ($this->Category->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getCandidates() === $this) {
-                $category->setCandidates(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Country[]
-     */
-    public function getCountry(): Collection
-    {
-        return $this->country;
-    }
-
-    public function addCountry(Country $country): self
-    {
-        if (!$this->country->contains($country)) {
-            $this->country[] = $country;
-            $country->setCandidates($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCountry(Country $country): self
-    {
-        if ($this->country->removeElement($country)) {
-            // set the owning side to null (unless already changed)
-            if ($country->getCandidates() === $this) {
-                $country->setCandidates(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Resort[]
-     */
-    public function getResort(): Collection
-    {
-        return $this->resort;
-    }
-
-    public function addResort(Resort $resort): self
-    {
-        if (!$this->resort->contains($resort)) {
-            $this->resort[] = $resort;
-            $resort->setCandidates($this);
-        }
-
-        return $this;
-    }
-
-    public function removeResort(Resort $resort): self
-    {
-        if ($this->resort->removeElement($resort)) {
-            // set the owning side to null (unless already changed)
-            if ($resort->getCandidates() === $this) {
-                $resort->setCandidates(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getDateFrom(): ?\DateTimeInterface
+      public function getDateFrom(): ?\DateTimeInterface
     {
         return $this->DateFrom;
     }
@@ -291,6 +183,66 @@ class Candidates
     public function setDateTo(?\DateTimeInterface $dateTo): self
     {
         $this->dateTo = $dateTo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Resort[]
+     */
+    public function getResort(): Collection
+    {
+        return $this->resort;
+    }
+
+    public function addResort(Resort $resort): self
+    {
+        if (!$this->resort->contains($resort)) {
+            $this->resort[] = $resort;
+        }
+
+        return $this;
+    }
+
+    public function removeResort(Resort $resort): self
+    {
+        $this->resort->removeElement($resort);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategory(): Collection
+    {
+        return $this->category;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->category->contains($category)) {
+            $this->category[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
