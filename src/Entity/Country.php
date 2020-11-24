@@ -22,10 +22,6 @@ class Country
      */
     private $country;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Candidates::class, inversedBy="country")
-     */
-    private $candidates;
 
     public function __toString()
     {
@@ -52,15 +48,4 @@ class Country
         return $this;
     }
 
-    public function getCandidates(): ?Candidates
-    {
-        return $this->candidates;
-    }
-
-    public function setCandidates(?Candidates $candidates): self
-    {
-        $this->candidates = $candidates;
-
-        return $this;
-    }
 }
