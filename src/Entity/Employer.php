@@ -22,16 +22,6 @@ class Employer
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $first_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $last_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $email;
 
     /**
@@ -64,6 +54,11 @@ class Employer
      */
     private $job;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $contactName;
+
     public function __construct()
     {
         $this->job = new ArrayCollection();
@@ -74,29 +69,6 @@ class Employer
         return $this->id;
     }
 
-    public function getFirstName(): ?string
-    {
-        return $this->first_name;
-    }
-
-    public function setFirstName(string $first_name): self
-    {
-        $this->first_name = $first_name;
-
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->last_name;
-    }
-
-    public function setLastName(string $last_name): self
-    {
-        $this->last_name = $last_name;
-
-        return $this;
-    }
 
     public function getEmail(): ?string
     {
@@ -206,5 +178,17 @@ class Employer
         // to show the id of the Category in the select
         // return $this->id;
 
+    }
+
+    public function getContactName(): ?string
+    {
+        return $this->contactName;
+    }
+
+    public function setContactName(?string $contactName): self
+    {
+        $this->contactName = $contactName;
+
+        return $this;
     }
 }

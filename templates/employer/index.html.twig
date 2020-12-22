@@ -9,9 +9,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Company_name</th>
-                <th>First_name</th>
-                <th>Last_name</th>
+                <th>Company</th>
+                <th>Contact</th>
                 <th>Email</th>
                 <th>Password</th>
                 <th>Address1</th>
@@ -24,8 +23,7 @@
         {% for employer in employers %}
             <tr>
                 <td>{{ employer.companyName }}</td>
-                <td>{{ employer.firstName }}</td>
-                <td>{{ employer.lastName }}</td>
+                <td>{{ employer.contactName }}</td>
                 <td>{{ employer.email }}</td>
                 <td>{{ employer.password }}</td>
                 <td>{{ employer.address1 }}</td>
@@ -37,9 +35,7 @@
                 </td>
             </tr>
         {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
+
         {% endfor %}
         </tbody>
     </table>
