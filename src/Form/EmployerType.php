@@ -17,8 +17,8 @@ class EmployerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name', TextType::class)
-            ->add('last_name', TextType::class)
+
+            ->add('contactName',TextType::class)
             ->add('email',EmailType::class)
             ->add('password',RepeatedType::class,[
                 'type'=>PasswordType::class,
@@ -29,7 +29,7 @@ class EmployerType extends AbstractType
             ->add('address1', TextType::class)
             ->add('address2', TextType::class)
             ->add('telephone', TextType::class)
-            ->add('Register', SubmitType::class)
+         //   ->add('Register', SubmitType::class)
         ;
     }
 

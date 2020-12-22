@@ -21,13 +21,18 @@ class JobType extends AbstractType
             ->add('description',TextType::class, [
                 'label' => 'Description of role'])
             ->add('date_start',DateType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'datetimepicker datetime'
+                ],
 
                 ])
             ->add('date_end',DateType::class, [
-                    'widget' => 'single_text']
-
-            )
+                    'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'datetimepicker datetime'
+                ],
+                ])
 
             ->add('requirements')
             ->add('languages',ChoiceType::class, [

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Employer;
-use App\Form\Employer1Type;
+use App\Form\EmployerType;
 use App\Repository\EmployerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class EmployerController extends AbstractController
     public function new(Request $request): Response
     {
         $employer = new Employer();
-        $form = $this->createForm(Employer1Type::class, $employer);
+        $form = $this->createForm(EmployerType::class, $employer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,9 @@ class EmployerController extends AbstractController
      */
     public function edit(Request $request, Employer $employer): Response
     {
-        $form = $this->createForm(Employer1Type::class, $employer);
+        $form = $this->createForm(EmployerType::class, $employer);
+        $form->remove('password');
+        $form->remove('Register');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

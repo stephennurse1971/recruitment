@@ -6,6 +6,7 @@ use App\Entity\Country;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CountryType extends AbstractType
 {
@@ -13,6 +14,13 @@ class CountryType extends AbstractType
     {
         $builder
             ->add('country')
+            ->add('include_resort',ChoiceType::class,[
+            'label'=>'Include In Resort',
+            'choices'=>[
+            'Yes'=>1,
+            'No'=>0
+            ]
+            ])
         ;
     }
 

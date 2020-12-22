@@ -22,6 +22,7 @@ class CountryController extends AbstractController
     {
         return $this->render('admin/country/index.html.twig', [
             'countries' => $countryRepository->findAll(),
+
         ]);
     }
 
@@ -53,7 +54,7 @@ class CountryController extends AbstractController
      */
     public function show(Country $country): Response
     {
-        return $this->render('country/show.html.twig', [
+        return $this->render('admin/country/show.html.twig', [
             'country' => $country,
         ]);
     }
@@ -72,7 +73,7 @@ class CountryController extends AbstractController
             return $this->redirectToRoute('country_index');
         }
 
-        return $this->render('country/edit.html.twig', [
+        return $this->render('admin/country/edit.html.twig', [
             'country' => $country,
             'form' => $form->createView(),
         ]);

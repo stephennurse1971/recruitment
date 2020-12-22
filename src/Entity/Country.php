@@ -27,6 +27,11 @@ class Country
      */
     private $candidates;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $include_resort;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +65,18 @@ class Country
     public function setCandidates(?Candidates $candidates): self
     {
         $this->candidates = $candidates;
+
+        return $this;
+    }
+
+    public function getIncludeResort(): ?bool
+    {
+        return $this->include_resort;
+    }
+
+    public function setIncludeResort(bool $include_resort): self
+    {
+        $this->include_resort = $include_resort;
 
         return $this;
     }

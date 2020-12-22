@@ -3,7 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Candidates;
+use App\Entity\Country;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,11 +20,34 @@ class CandidatesType extends AbstractType
             ->add('email')
             ->add('phone')
             ->add('address')
-            ->add('dateOfBirth')
-            ->add('nationality')
+
+            ->add('dateOfBirth',DateType::class, [
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'datetimepicker datetime'
+                ],
+
+
+            ])
+            ->add('nationality',EntityType::class,[
+                'class'=>Country::class
+            ])
             ->add('previousSeasonnaire')
-            ->add('DateFrom')
-            ->add('dateTo')
+            ->add('DateFrom',DateType::class, [
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'datetimepicker datetime'
+                ],
+
+            ])
+            ->add('DateTo',DateType::class, [
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'datetimepicker datetime'
+                ],
+
+            ])
+
         ;
     }
 

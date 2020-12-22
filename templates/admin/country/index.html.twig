@@ -11,7 +11,8 @@
             <tr>
                 <th>Id</th>
                 <th>Country</th>
-                <th>actions</th>
+                <th>Country</th>
+                <th>Include Resort</th>
             </tr>
         </thead>
         <tbody>
@@ -19,18 +20,20 @@
             <tr>
                 <td>{{ country.id }}</td>
                 <td>{{ country.country }}</td>
+                <td>{{ country.country }}</td>
                 <td>
-                    <a href="{{ path('country_show', {'id': country.id}) }}">show</a>
-                    <a href="{{ path('country_edit', {'id': country.id}) }}">edit</a>
+                    <a class="btn-outline-success" href="{{ path('country_show', {'id': country.id}) }}">Show</a>
+                    <a class="btn-outline-danger" href="{{ path('country_edit', {'id': country.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
+         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('country_new') }}">Create new</a>
+    <a class="btn btn-outline-success" href="{{ path('country_new') }}">Create new</a>
+
+{% for test in countries %}
+    {{ test.include_resort }}
+    {%  endfor  %}
 {% endblock %}

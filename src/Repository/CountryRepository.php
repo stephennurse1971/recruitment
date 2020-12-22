@@ -46,5 +46,18 @@ class CountryRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+
+      /**
+     * @return Country[] Returns an array of Country objects
+      */
+
+    public function listCountryInResort($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.include_resort = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
