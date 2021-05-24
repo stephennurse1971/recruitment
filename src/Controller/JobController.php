@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Job;
 use App\Form\JobType;
+use App\Repository\EmployerRepository;
 use App\Repository\JobRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,23 @@ class JobController extends AbstractController
         ]);
     }
 
+
+
+    /**
+     * @Route("/getjobs/{employerId}", name="job_by_employer", methods={"GET"})
+     */
+    public function getJobs(int $employerId,JobRepository $jobRepository, EmployerRepository $employerRepository ){
+        $job = $jobRepository->findBy([
+            'employer' => $employerId
+        ]);
+        return $this->render('job/index.html.twig', [
+            'jobs' => $job,
+            'employer' => $employerRepository->find($employerId)
+        ]);
+    }
+
+
+
     /**
      * @Route("/new", name="job_new", methods={"GET","POST"})
      */
@@ -38,7 +56,6 @@ class JobController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($job);
             $entityManager->flush();
-
             return $this->redirectToRoute('job_index');
         }
 

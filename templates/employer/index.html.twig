@@ -16,7 +16,7 @@
                 <th>Address1</th>
                 <th>Address2</th>
                 <th>Telephone</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -30,8 +30,9 @@
                 <td>{{ employer.address2 }}</td>
                 <td>{{ employer.telephone }}</td>
                 <td>
-                    <a class="btn btn-outline-info" href="{{ path('employer_show', {'id': employer.id}) }}">Show</a>
-                    <a class="btn btn-outline-danger" href="{{ path('employer_edit', {'id': employer.id}) }}">Edit</a>
+                    <a class="btn btn-outline-info btn-sm" href="{{ path('employer_show', {'id': employer.id}) }}">Show</a>
+                    <a class="btn btn-outline-danger btn-sm" href="{{ path('employer_edit', {'id': employer.id}) }}">Edit</a>
+                    <a class="btn btn-outline-success btn-sm" href="{{ path('job_by_employer', {'employerId':employer.id}) }}">Jobs</a>
                 </td>
             </tr>
         {% else %}

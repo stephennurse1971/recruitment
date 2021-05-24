@@ -1,10 +1,10 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Job index{% endblock %}
+{% block title %}Jobs{% endblock %}
 
 {% block content %}
     {{ parent() }}
-    <h1>Job index</h1>
+    <h1>Jobs: {{employer.companyName }}</h1>
     <table class="table">
         <thead>
         <tr>
@@ -52,12 +52,10 @@
                 <td>{{ include('job/_delete_form.html.twig') }}</td>
             </tr>
         {% else %}
-            <tr>
-                <td colspan="12">no records found</td>
-            </tr>
+
         {% endfor %}
         </tbody>
     </table>
 
-    <a class="btn btn-outline-info" href="{{ path('job_new') }}">Add</a>
+    <a class="btn btn-outline-info" href="{{ path('job_new') }}">New</a>
 {% endblock %}
